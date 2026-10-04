@@ -1349,6 +1349,33 @@
       "extra-args": "-c ft2232 --fpga-part xc7a100tfgg676"
     }
   },
+  // https://digilent.com/reference/programmable-logic/vc707/start
+  // Board designed and manufactured by Xilinx; the only Digilent-sourced
+  // part is the onboard JTAG-SMT2 module (FT2232H) used for USB-JTAG
+  // programming. openFPGALoader has no named "vc707" board profile (it
+  // has the sibling "vc709"), so the cable and part are passed
+  // explicitly, same pattern as alinx-ax7035 above.
+  // Requires an openxc7 toolchain build with a chipdb for the xc7vx485t
+  // die. Verified end to end on real VC707 hardware: apio build produced
+  // a bitstream that openFPGALoader loaded over JTAG with DONE asserted.
+  // vid/pid confirmed via openFPGALoader --scan-usb on the physical board.
+  "vc707": {
+    "description": "VC707 Evaluation Board (Xilinx, Virtex7)",
+    "fpga-id": "xc7vx485tffg1761-2",
+    "programmer": {
+      "id": "openfpgaloader",
+      // 15MHz confirmed reliable on the onboard JTAG-SMT2 module, in
+      // line with other boards above using the same Digilent JTAG-SMT2
+      // programming module (e.g. ac701, usrpx300) that also pin
+      // CABLE_MHZ(15).
+      "extra-args": "-c digilent --freq 15000000 --fpga-part xc7vx485t"
+    },
+    "usb": {
+      "vid": "0403",
+      "pid": "6010",
+      "product-regex": "Digilent Adept USB Device"
+    }
+  },
   // ZX Spectrum clone family; bare JTAG points (TMS/TDI/TDO/TCK/GND), the
   // official manual documents openFPGALoader with an Altera USB-Blaster
   // (alternative: -c ft232). All three variants share the PCB/pinout.

@@ -946,6 +946,22 @@
       "speed": "2"
     }
   },
+  // VC707's die. The openxc7 toolchain package needs a chipdb-xc7vx485t.bin
+  // built for this die (nextpnr's himbaechel/uarch/xilinx CMakeLists already
+  // lists xc7vx485t as a supported HIMBAECHEL_XILINX_DEVICES entry) before
+  // this part is usable; verified working synth+pnr+bitstream end to end
+  // with a locally-built chipdb.
+  "xc7vx485tffg1761-2": {
+    "part-num": "XC7VX485T-2FFG1761C",
+    "arch": "xilinx",
+    "size": "485k",
+    "xilinx-params": {
+      "yosys-family": "virtex7",
+      "yosys-arch": "xc7",
+      "yosys-part": "xc7vx485tffg1761-2",
+      "speed": "2"
+    }
+  },
   "xc7s25csga324-1": {
     "part-num": "XC7S25-1CSGA324",
     "arch": "xilinx",
